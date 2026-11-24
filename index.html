@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>拾集播放器</title>
+<link rel="stylesheet" href="style.css">
+<header><h1>拾集播放器</h1><label class="import">导入本地视频<input id="files" type="file" accept="video/*,.mp4,.webm,.mov,.m4v" multiple></label></header>
+<main>
+<section>
+<h2 id="title">选择视频开始播放</h2>
+<video id="video" controls playsinline></video>
+<p id="status" role="status">可一次导入多集视频。</p>
+</section>
+<aside>
+<h2>剧集列表</h2>
+<label><input type="checkbox" id="auto" checked> 自动播放下一集</label>
+<ol id="episodes"></ol>
+</aside>
+</main>
+<script src="player.js"></script>
+</html>
