@@ -1,21 +1,51 @@
 <!doctype html>
 <html lang="zh-CN">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>拾集播放器</title>
 <link rel="stylesheet" href="style.css">
-<header><h1>拾集播放器</h1><label class="import">导入本地视频<input id="files" type="file" accept="video/*,.mp4,.webm,.mov,.m4v" multiple></label></header>
+<script src="player.js" defer></script>
+</head>
+<body>
+<nav aria-label="主导航">
+  <strong>拾集</strong>
+  <button data-view="watch">播放</button>
+  <button data-view="library">找剧</button>
+  <button data-view="rank">播放排行</button>
+  <button data-view="favorites">收藏</button>
+  <button data-view="history">观看历史</button>
+</nav>
 <main>
-<section>
-<h2 id="title">选择视频开始播放</h2>
-<video id="video" controls playsinline></video>
-<p id="status" role="status">可一次导入多集视频。</p>
+<header>
+  <h1 id="heading">播放</h1>
+  <details id="import">
+    <summary>添加剧集</summary>
+    <form id="add">
+      <label>剧名 <input name="series" required maxlength="100"></label>
+      <label>分类 <select name="genre"><option>未分类</option><option>都市</option><option>喜剧</option><option>悬疑</option><option>古装</option><option>动画</option></select></label>
+      <label>本地视频 <input id="files" type="file" accept="video/*,.mp4,.webm,.mov,.m4v" multiple></label>
+      <label>或视频直链 <input name="url" type="url" placeholder="https://…"></label>
+      <button class="primary">添加</button>
+    </form>
+  </details>
+</header>
+<p id="status" role="status"></p>
+<section id="watch">
+  <div class="screen"><video id="video" controls playsinline></video><p id="empty">添加剧集后即可播放</p></div>
+  <div class="controls">
+    <div><h2 id="title">暂无剧集</h2><span id="episode"></span></div>
+    <button id="favorite" disabled>收藏</button>
+    <button id="previous" disabled>上一集</button>
+    <button id="next" disabled>下一集</button>
+    <label><input type="checkbox" id="auto" checked> 自动连播</label>
+  </div>
+  <div id="episodes" aria-label="选集"></div>
 </section>
-<aside>
-<h2>剧集列表</h2>
-<label><input type="checkbox" id="auto" checked> 自动播放下一集</label>
-<ol id="episodes"></ol>
-</aside>
+<section id="catalog" hidden>
+  <div id="filters"><input id="query" type="search" placeholder="输入剧名" aria-label="搜索剧名"><select id="genre" aria-label="分类"></select></div>
+  <div id="results"></div>
+</section>
 </main>
-<script src="player.js"></script>
+</body>
 </html>

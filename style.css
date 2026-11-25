@@ -1,16 +1,38 @@
-:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #161310; color: #f6efe8; }
-body { max-width: 1280px; padding: 0 5vw; margin: auto; }
-header { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 12px; padding: 22px 0; border-bottom: 1px solid #54443b; }
-h1 { margin: 0; font-size: 1.55rem; }
-h2 { font-size: 1.15rem; overflow-wrap: anywhere; }
-main { display: grid; grid-template-columns: minmax(0, 3fr) minmax(230px, 1fr); gap: 24px; padding-top: 18px; }
-video { display: block; width: 100%; aspect-ratio: 16/9; max-height: 72vh; background: #080706; border-radius: 12px; }
-aside { background: #241d19; padding: 0 18px 18px; border-radius: 14px; align-self: start; }
-.import { display: inline-flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-input[type=file] { max-width: 100%; }
-input::file-selector-button { background: #ffba8a; color: #241309; border: 0; border-radius: 8px; padding: 8px; cursor: pointer; }
-ol { display: grid; gap: 8px; padding-left: 24px; max-height: 62vh; overflow: auto; }
-button { width: 100%; text-align: left; color: inherit; background: #362821; border: 1px solid #665046; border-radius: 8px; padding: 10px; overflow-wrap: anywhere; cursor: pointer; }
-button[aria-current=true] { background: #ffba8a; color: #241309; }
-#status { color: #d6bfb1; }
-@media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+:root { color-scheme: dark; font: 16px system-ui, sans-serif; color: #eaf3f1; background: #111916; --accent: #b9e888; --panel: #1c2924; --line: #354941; --muted: #adc0b7; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; display: grid; grid-template-columns: 164px minmax(0, 1fr); }
+[hidden] { display: none !important; }
+nav { display: flex; flex-direction: column; gap: 8px; background: #18231e; padding: 30px 14px; border-right: 1px solid var(--line); }
+nav strong { font-size: 1.7rem; color: var(--accent); margin: 0 10px 24px; }
+nav button { text-align: left; background: transparent; border-color: transparent; }
+main { width: 100%; max-width: 1260px; margin: auto; align-self: start; padding: 24px clamp(16px, 4vw, 56px) 56px; }
+header, .controls, #filters { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+header { justify-content: space-between; }
+h1 { font-size: 1.7rem; margin: 0; }
+h2 { font-size: 1.2rem; margin: 0 0 5px; overflow-wrap: anywhere; }
+button, input, select { font: inherit; }
+button, input:not([type=checkbox]), select, summary { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; color: inherit; background: var(--panel); }
+button, summary { cursor: pointer; }
+button:disabled { opacity: .45; cursor: default; }
+button[aria-current=true], .primary { background: var(--accent); color: #172217; }
+details { position: relative; }
+form { position: absolute; z-index: 2; right: 0; top: 46px; display: grid; gap: 12px; width: min(345px, 85vw); padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: #22332b; }
+form label { display: grid; gap: 5px; }
+form input { width: 100%; }
+#status, #episode, #empty, .card p { color: var(--muted); }
+.screen { position: relative; display: grid; place-items: center; background: #090e0c; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+video { width: 100%; height: min(57vh, 560px); display: block; }
+#empty { position: absolute; pointer-events: none; }
+.controls { padding: 16px 0; }
+.controls div { flex: 1 1 200px; }
+#episodes { display: flex; flex-wrap: wrap; gap: 8px; }
+#query { flex: 1 1 200px; }
+#results { margin-top: 18px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 215px), 1fr)); gap: 14px; }
+.card { padding: 16px; background: var(--panel); border-radius: 12px; border: 1px solid var(--line); }
+.card p { font-size: .9rem; }
+@media (max-width: 660px) {
+  body { grid-template-columns: 1fr; }
+  nav { flex-direction: row; flex-wrap: wrap; padding: 8px; }
+  nav strong { margin: 3px 6px; }
+  video { height: 48vh; }
+}
